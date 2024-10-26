@@ -22,3 +22,4 @@ app.get('/lembretes/:id/obs', (req, res) => {
 app.listen(5000, (() => {
     console.log('obs. Porta 5000');
 }));
+
