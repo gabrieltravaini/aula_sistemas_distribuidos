@@ -11,12 +11,12 @@ app.post('/lembretes/:id/obs', async (req, res) => {
     const idObs = uuidv4();
     const { texto } = req.body;
     const observacoesDoLembrete = obsPorLembrete[req.params.id] || [];
-    observacoesDoLembrete.push({ id: idObs, texto });
+    observacoesDoLembrete.push({ id: idObs, texto, status:'aguardando' });
     obsPorLembrete[req.params.id] = observacoesDoLembrete;
     await axios.post('http://localhost:10000/eventos', {
         tipo: "ObservacaoCriada",
         dados: {
-            id: idObs, texto, lembreteId: req.params.id
+            id: idObs, texto, lembreteId: req.params.id,status:'aguardando'
         }
     })
     res.status(201).send(observacoesDoLembrete);
